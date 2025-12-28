@@ -1,4 +1,5 @@
 import { Linkedin } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -14,6 +15,9 @@ const Footer = () => {
             >
               hello@zordr.in
             </a>
+            <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors mt-2">
+              About Zordr
+            </Link>
           </div>
 
           {/* Social Links */}

@@ -10,6 +10,8 @@ const Header = () => {
   const navLinks = [
     { href: "/how-it-works", label: "How It Works" },
     { href: "/for-colleges", label: "For Colleges" },
+    { href: "/for-canteens", label: "For Canteens" },
+    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 
@@ -30,9 +32,8 @@ const Header = () => {
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-foreground ${
-                  isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-foreground ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                  }`}
               >
                 {link.label}
               </Link>
@@ -60,9 +61,8 @@ const Header = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-sm font-medium py-2 ${
-                    isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                  }`}
+                  className={`text-sm font-medium py-2 ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                    }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}

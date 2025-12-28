@@ -1,32 +1,38 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { ShoppingCart, Clock, ChefHat, UserCheck, Workflow, Calendar, Package, Sparkles, BarChart3 } from "lucide-react";
+import { Workflow, Calendar, Package, Sparkles, BarChart3, Building, Store, Users, Activity, TrendingUp } from "lucide-react";
 
 const HowItWorks = () => {
   const steps = [
     {
-      icon: ShoppingCart,
+      icon: Building,
       step: "1",
-      title: "Students place orders before breaks",
-      description: "Students browse the menu and place their orders ahead of time through the Zordr app.",
+      title: "Campus Onboarding",
+      description: "We map your campus ecosystem, configure time slots, and digitize menus.",
     },
     {
-      icon: Clock,
+      icon: Store,
       step: "2",
-      title: "Orders are grouped into time slots",
-      description: "Orders are automatically organized into pickup time slots to distribute demand evenly.",
+      title: "Canteen Setup",
+      description: "Partners get their dashboard setup to manage orders, inventory, and menu availability.",
     },
     {
-      icon: ChefHat,
+      icon: Users,
       step: "3",
-      title: "Canteens prepare confirmed orders only",
-      description: "Canteens receive a clear list of confirmed orders, eliminating guesswork and waste.",
+      title: "Student Adoption",
+      description: "Students download the app, browse menus, and start pre-ordering for their breaks.",
     },
     {
-      icon: UserCheck,
+      icon: Activity,
       step: "4",
-      title: "Students pick up without queues",
-      description: "Students arrive at their assigned slot and pick up their ready orders instantly.",
+      title: "Demand Stabilization",
+      description: "Orders flow into manageable time slots, reducing peak load and ensuring kitchen readiness.",
+    },
+    {
+      icon: TrendingUp,
+      step: "5",
+      title: "Revenue Optimization",
+      description: "Operations become predictable, wastage drops, and throughput/revenue increases.",
     },
   ];
 
@@ -41,7 +47,7 @@ const HowItWorks = () => {
   return (
     <main>
       {/* Hero */}
-      <section className="section-padding">
+      <section className="section-padding bg-gradient-to-b from-primary/10 to-background pt-32 pb-24">
         <div className="container-tight text-center">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground">
             How It Works

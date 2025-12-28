@@ -8,6 +8,8 @@ import Footer from "./components/Footer";
 import Index from "./pages/Index";
 import HowItWorks from "./pages/HowItWorks";
 import ForColleges from "./pages/ForColleges";
+import ForCanteens from "./pages/ForCanteens";
+import About from "./pages/About";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -26,6 +28,8 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/how-it-works" element={<HowItWorks />} />
               <Route path="/for-colleges" element={<ForColleges />} />
+              <Route path="/for-canteens" element={<ForCanteens />} />
+              <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
