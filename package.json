@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://ShreevanshN.github.io/Zordr-Landing-Page",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
