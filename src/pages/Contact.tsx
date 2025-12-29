@@ -50,10 +50,46 @@ const Contact = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // ... (validateForm logic remains)
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (validateForm()) {
-      setIsSubmitted(true);
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
+    // --------------------------------------------------------------------------
+    // TODO: Replace 'YOUR_FORM_ID' with your actual Formspree Form ID.
+    // 1. Go to https://formspree.io/
+    // 2. Create a free account with your email (shreevansh2303@gmail.com)
+    // 3. Create a new form
+    // 4. Copy the URL (e.g., https://formspree.io/f/xyzaqwer) and paste it below
+    // --------------------------------------------------------------------------
+    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaqypzkr";
+
+    try {
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        console.error("Form submission failed");
+        alert("Something went wrong. Please try again or email us directly.");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Something went wrong. Please check your internet connection.");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -275,8 +311,8 @@ const Contact = () => {
                   />
                 </div>
 
-                <Button type="submit" size="lg" className="w-full">
-                  Send Message
+                <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
               </form>
             </div>
