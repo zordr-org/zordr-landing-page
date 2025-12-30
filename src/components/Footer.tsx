@@ -10,10 +10,10 @@ const Footer = () => {
           <div className="flex flex-col items-center md:items-start gap-2">
             <span className="text-lg font-bold text-foreground">ZORDR</span>
             <a
-              href="mailto:hello@zordr.in"
+              href="mailto:info@zordr.in"
               className="text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              hello@zordr.in
+              info@zordr.in
             </a>
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors mt-2">
               About Zordr
