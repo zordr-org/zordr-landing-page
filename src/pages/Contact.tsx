@@ -273,6 +273,7 @@ const Contact = () => {
                         <SelectItem value="college_admin">College Administrator</SelectItem>
                         <SelectItem value="canteen_owner">Canteen Owner</SelectItem>
                         <SelectItem value="student">Student</SelectItem>
+                        <SelectItem value="employee">Employee Applicant</SelectItem>
                         <SelectItem value="other">Other</SelectItem>
                       </SelectContent>
                     </Select>

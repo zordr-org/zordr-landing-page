@@ -5,25 +5,18 @@ import { Briefcase, MapPin, Clock, ArrowRight, Heart, Zap, Users } from "lucide-
 const Careers = () => {
     const positions = [
         {
-            title: "Frontend Engineer",
+            title: "Full Stack Developer",
             department: "Engineering",
             location: "Remote / Hyderabad",
             type: "Full-time",
-            description: "We are looking for a passionate Frontend Engineer to help us build the future of campus dining. You will be working with React, TypeScript, and Tailwind CSS to create beautiful and responsive interfaces.",
+            description: "We are looking for an experienced Full Stack Developer with production-level expertise in React Native, React.js, and Node.js. You will be building scalable applications for our campus operations platform.",
         },
         {
-            title: "Backend Engineer",
+            title: "Senior Full Stack Developer",
             department: "Engineering",
             location: "Remote / Hyderabad",
             type: "Full-time",
-            description: "Join our backend team to build robust and scalable APIs. You will be working with Node.js, databases, and cloud infrastructure to power our campus operations platform.",
-        },
-        {
-            title: "Marketing Specialist",
-            department: "Marketing",
-            location: "Hyderabad",
-            type: "Full-time",
-            description: "We need a creative Marketing Specialist to help us reach more colleges and students. You will be responsible for content creation, social media management, and campus outreach campaigns.",
+            description: "Join us as a Senior Developer. Deep experience in the React ecosystem (Native & Web) and Node.js microservices is required. You will lead technical decisions and mentor junior developers.",
         },
     ];
 
