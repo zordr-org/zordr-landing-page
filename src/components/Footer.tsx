@@ -18,6 +18,9 @@ const Footer = () => {
             <Link to="/about" className="text-sm text-muted-foreground hover:text-foreground transition-colors mt-2">
               About Zordr
             </Link>
+            <Link to="/careers" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Careers
+            </Link>
           </div>
 
           {/* Social Links */}
