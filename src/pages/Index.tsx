@@ -1,135 +1,144 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Clock, TrendingDown, Trash2, ArrowRight, Building2, UtensilsCrossed, Zap, Server, Percent, Maximize, Receipt, EyeOff, CalendarClock, Utensils, Eye, TrendingUp, Smartphone, ChefHat, ShoppingBag, BarChart3, Store, Bike, Megaphone, CheckCircle2, XCircle } from "lucide-react";
-import heroMockup from "@/assets/hero-mockup.png";
+import {
+  ArrowRight, Clock, Users, BarChart3, Smartphone, LayoutDashboard,
+  Building2, Zap, CheckCircle, Star, ChefHat, ShoppingBag, TrendingUp, Shield
+} from "lucide-react";
+
+import nitLogo from "@/assets/nitlogo.png";
+import bitsLogo from "@/assets/bitslogo.png";
+import vjtiLogo from "@/assets/vjitlogo.png";
+import iiitLogo from "@/assets/iiithlogo.png";
+import vitLogo from "@/assets/vitlogo.png";
+
+const colleges = [
+  { logo: nitLogo,  full: "NIT Warangal" },
+  { logo: bitsLogo, full: "BITS Pilani" },
+  { logo: vjtiLogo, full: "VJTI Mumbai" },
+  { logo: iiitLogo, full: "IIIT Hyderabad" },
+  { logo: vitLogo,  full: "VIT Vellore" },
+];
+
+const testimonials = [
+  {
+    name: "Dr. Ramesh Iyer",
+    role: "Dean of Administration",
+    college: "NIT Warangal",
+    logo: nitLogo,
+    quote: "ZORDR transformed our canteen operations completely. Queue times dropped by 70% in the first month.",
+    avatar: "RI",
+  },
+  {
+    name: "Suresh Kumar",
+    role: "Canteen Owner",
+    college: "BITS Pilani",
+    logo: bitsLogo,
+    quote: "My revenue went up 40% because I stopped wasting food and started serving more students per hour.",
+    avatar: "SK",
+  },
+  {
+    name: "Priya Nair",
+    role: "3rd Year Student",
+    college: "VJTI Mumbai",
+    logo: vjtiLogo,
+    quote: "I actually get to eat lunch now. Pre-ordering means my food is ready the moment I arrive.",
+    avatar: "PN",
+  },
+];
 
 const Index = () => {
   return (
     <main>
-      {/* Hero Section */}
+      {/* HERO */}
       <section className="section-padding bg-gradient-to-b from-primary/10 to-background pt-32 pb-24">
         <div className="container-tight text-center">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight max-w-3xl mx-auto">
-            The Operating System for Campus F&B
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold mb-6">
+            <Zap size={14} />
+            <span>Now live on campuses across India</span>
+          </div>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-foreground leading-tight max-w-4xl mx-auto">
+            Revolutionizing Campus <br />
+            <span className="text-primary">Food Experience</span>
           </h1>
           <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Zordr is a closed-ecosystem ordering and operations platform built for colleges to reduce chaos, improve throughput, and increase canteen revenue.
+            ZORDR helps colleges streamline food ordering, eliminate queues, and increase vendor revenue — all without any hardware.
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg">
-              <Link to="/contact">Request a Campus Demo</Link>
+            <Button asChild size="lg" className="h-12 px-8 text-base">
+              <Link to="/contact">Book a Demo</Link>
             </Button>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-2 text-primary font-semibold hover:underline underline-offset-4"
-            >
-              Talk to Us
-              <ArrowRight size={16} />
+            <Link to="/product" className="inline-flex items-center gap-2 text-primary font-semibold hover:underline underline-offset-4 group">
+              Explore the Platform
+              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
             </Link>
           </div>
 
-          <div className="mt-16 w-full max-w-5xl mx-auto relative group animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-purple-500/20 to-primary/20 rounded-2xl blur-lg opacity-70 group-hover:opacity-100 transition duration-1000"></div>
-            <div className="relative rounded-xl overflow-hidden shadow-2xl border border-border/50 bg-card/50 backdrop-blur-sm">
-              <img
-                src={heroMockup}
-                alt="Zordr Platform Ecosystem - Student App, Kitchen Dashboard, and Admin Panel"
-                className="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-[1.01]"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Problem Section */}
-      <section className="section-padding bg-secondary/30">
-        <div className="container-tight">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-            Campus Food Operations Are Broken
-          </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="bg-background border border-border rounded-lg p-6">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <Clock className="text-primary" size={24} />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Long Queues During Peak Hours</h3>
-              <p className="text-muted-foreground">
-                Students waste precious break time waiting in line instead of eating.
-              </p>
-            </div>
-            <div className="bg-background border border-border rounded-lg p-6">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <TrendingDown className="text-primary" size={24} />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">No Demand Prediction</h3>
-              <p className="text-muted-foreground">
-                Canteens can't forecast demand, leading to over or under preparation.
-              </p>
-            </div>
-            <div className="bg-background border border-border rounded-lg p-6">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <Receipt className="text-primary" size={24} />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Manual Billing & Confusion</h3>
-              <p className="text-muted-foreground">
-                Manual order taking leads to errors, lost slips, and payment confusion.
-              </p>
-            </div>
-            <div className="bg-background border border-border rounded-lg p-6">
-              <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                <EyeOff className="text-primary" size={24} />
-              </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Zero Data Visibility</h3>
-              <p className="text-muted-foreground">
-                Colleges have no insight into canteen sales, hygiene, or student feedback.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Solution Flow */}
-      <section className="section-padding">
-        <div className="container-tight">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-            How Zordr Fixes This
-          </h2>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+          {/* Hero Stats Strip */}
+          <div className="mt-16 grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto">
             {[
-              { icon: CalendarClock, text: "Pre-order based demand flow" },
-              { icon: Utensils, text: "Ready-to-pick vs ready-to-prepare logic" },
-              { icon: Eye, text: "Centralized order visibility" },
-              { icon: TrendingUp, text: "Predictable kitchen operations" },
-              { icon: Smartphone, text: "Zero hardware dependency" },
-            ].map((item, index) => (
-              <div key={index} className="flex items-center gap-4 p-4 border border-border rounded-lg bg-card/50">
-                <div className="p-2 rounded-md bg-primary/10 text-primary">
-                  <item.icon size={20} />
+              { icon: TrendingUp, value: "3x",  label: "Faster order throughput" },
+              { icon: Shield,     value: "40%", label: "Reduction in food wastage" },
+              { icon: Zap,        value: "24h", label: "Campus onboarding time" },
+            ].map((stat, i) => (
+              <div key={i} className="flex flex-col items-center gap-2 p-6 bg-background border border-border rounded-2xl shadow-sm">
+                <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
+                  <stat.icon size={20} />
                 </div>
-                <span className="font-medium">{item.text}</span>
+                <span className="text-4xl font-black text-primary">{stat.value}</span>
+                <span className="text-sm text-muted-foreground text-center">{stat.label}</span>
               </div>
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="relative p-8 border border-border rounded-xl bg-secondary/20">
-            <h3 className="text-xl font-semibold text-center mb-8">The Zordr Flow</h3>
+      {/* PROBLEM */}
+      <section className="section-padding bg-secondary/30">
+        <div className="container-tight">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Campus Food Is Broken</h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">Every campus deals with the same painful inefficiencies.</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              { icon: Clock,     title: "Long Queues",     desc: "Students waste 40% of their break time standing in line. Food gets cold. Tempers run high." },
+              { icon: Users,     title: "Manual Chaos",    desc: "Vendors rely on handwritten slips, shouting orders, and gut feel to manage 500 students at once." },
+              { icon: BarChart3, title: "Zero Visibility", desc: "Colleges have no data on vendor performance, food safety compliance, or student satisfaction." },
+            ].map((item, i) => (
+              <div key={i} className="p-6 bg-background border border-border rounded-xl">
+                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                  <item.icon className="text-primary" size={24} />
+                </div>
+                <h3 className="text-lg font-bold mb-2">{item.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ZORDR SOLUTION FLOW */}
+      <section className="section-padding">
+        <div className="container-tight">
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">How ZORDR Fixes This</h2>
+            <p className="text-muted-foreground text-lg max-w-xl mx-auto">A smart pre-order flow that distributes demand before it hits the counter.</p>
+          </div>
+          <div className="relative p-8 border border-border rounded-2xl bg-secondary/10">
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 relative">
-              {/* Connecting Line (Desktop) */}
-              <div className="hidden md:block absolute top-1/2 left-0 w-full h-0.5 bg-border -z-10 -translate-y-8"></div>
-
+              <div className="hidden md:block absolute top-1/2 left-0 w-full h-px bg-border -translate-y-1/2 -z-0"></div>
               {[
-                { icon: Smartphone, title: "Order", text: "Student places order" },
-                { icon: ChefHat, title: "Prep", text: "Kitchen prepares food" },
-                { icon: ShoppingBag, title: "Pickup", text: "Student picks up" },
-                { icon: BarChart3, title: "Analytics", text: "Admin views data" },
-              ].map((step, index) => (
-                <div key={index} className="flex flex-col items-center text-center bg-background p-4 rounded-lg shadow-sm border border-border w-full md:w-48 z-10">
+                { icon: Smartphone,  title: "Student Orders", text: "Pre-orders on app before break" },
+                { icon: ChefHat,     title: "Kitchen Preps",  text: "Food ready exactly on time" },
+                { icon: ShoppingBag, title: "Fast Pickup",    text: "Zero queue, grab and go" },
+                { icon: BarChart3,   title: "Admin Insight",  text: "Real-time data dashboard" },
+              ].map((step, i) => (
+                <div key={i} className="flex flex-col items-center text-center bg-background p-5 rounded-xl border border-border w-full md:w-44 z-10 shadow-sm">
                   <div className="w-12 h-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center mb-3">
-                    <step.icon size={24} />
+                    <step.icon size={22} />
                   </div>
-                  <h4 className="font-bold text-foreground">{step.title}</h4>
-                  <p className="text-sm text-muted-foreground">{step.text}</p>
+                  <h4 className="font-bold text-sm mb-1">{step.title}</h4>
+                  <p className="text-xs text-muted-foreground">{step.text}</p>
                 </div>
               ))}
             </div>
@@ -137,123 +146,123 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Who It's For */}
-      <section className="section-padding bg-secondary/30">
+      {/* PLATFORM OVERVIEW */}
+      <section className="section-padding bg-foreground text-background">
         <div className="container-tight">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-            Who It's For
-          </h2>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-background border border-border rounded-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <Building2 className="text-primary" size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-foreground">Colleges</h3>
-              </div>
-              <ul className="space-y-3">
-                {["No upfront cost", "Zero operational involvement", "Better student experience", "Real-time data visibility"].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="bg-background border border-border rounded-lg p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                  <UtensilsCrossed className="text-primary" size={24} />
-                </div>
-                <h3 className="text-xl font-bold text-foreground">Canteens</h3>
-              </div>
-              <ul className="space-y-3">
-                {["Higher throughput", "Predictable demand", "Reduced wastage", "More revenue per peak hour"].map((item) => (
-                  <li key={item} className="flex items-start gap-3">
-                    <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-muted-foreground">{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <div className="text-center mb-14">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">One Platform. Three Products.</h2>
+            <p className="text-primary-foreground/60 text-lg">Built for every stakeholder on campus.</p>
           </div>
-        </div>
-      </section>
-
-      {/* What Zordr Is NOT */}
-      <section className="section-padding">
-        <div className="container-tight text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-12">What Zordr Is NOT</h2>
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
-              { icon: Store, text: "Not a marketplace" },
-              { icon: Bike, text: "Not a delivery app" },
-              { icon: Megaphone, text: "Not customer-acquisition driven" },
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center justify-center p-6 bg-secondary/10 border border-border/50 rounded-lg">
-                <div className="mb-4 p-3 bg-destructive/10 rounded-full text-destructive">
-                  <XCircle size={32} />
-                </div>
-                <span className="font-semibold text-lg text-foreground mb-2">{item.text}</span>
+              { icon: Smartphone,      title: "Student App",        items: ["Browse digital menus", "Skip long queues", "Instant pickup alerts"] },
+              { icon: LayoutDashboard, title: "Vendor Dashboard",   items: ["Live order management", "Digital menu control", "Sales analytics"] },
+              { icon: Building2,       title: "Campus Admin Panel", items: ["Operational oversight", "Vendor performance data", "Campus digitalization"] },
+            ].map((product, i) => (
+              <div key={i} className="bg-white/5 border border-white/10 rounded-2xl p-8 hover:bg-white/10 transition">
+                <product.icon className="text-primary mb-5" size={36} />
+                <h3 className="text-xl font-bold mb-4">{product.title}</h3>
+                <ul className="space-y-2">
+                  {product.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-2 text-primary-foreground/70 text-sm">
+                      <CheckCircle size={14} className="text-primary flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
-          <div className="p-6 bg-primary/5 rounded-xl border border-primary/20 inline-block">
-            <p className="text-xl md:text-2xl font-bold text-primary">
-              "Zordr is infrastructure built for closed campus ecosystems."
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Why Zordr */}
-      <section className="section-padding">
-        <div className="container-tight">
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground text-center mb-12">
-            Why Zordr
-          </h2>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { icon: Building2, text: "Built for campuses only" },
-              { icon: Server, text: "No hardware dependency" },
-              { icon: Percent, text: "No heavy commissions" },
-              { icon: Maximize, text: "Designed to scale" },
-            ].map((item, index) => (
-              <div key={index} className="flex flex-col items-center text-center p-6 border border-border rounded-lg">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                  <item.icon className="text-primary" size={24} />
-                </div>
-                <span className="font-medium text-foreground">{item.text}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Vision Section */}
-      <section className="py-24 bg-secondary/5 border-y border-border/50">
-        <div className="container-tight text-center max-w-4xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-black text-foreground mb-8 tracking-tight">
-            Built as Campus Infrastructure
-          </h2>
-          <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed font-light">
-            Zordr is building <span className="text-primary font-semibold">CampusOS</span> — a foundational technology layer for food, commerce, and services inside institutional ecosystems.
-          </p>
-        </div>
-      </section>
-
-      {/* CTA Strip */}
-      <section className="section-padding bg-foreground">
-        <div className="container-tight text-center">
-          <h2 className="text-2xl md:text-3xl font-bold text-background mb-8">
-            Ready to modernize your campus food ecosystem?
-          </h2>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button asChild size="lg" className="bg-primary hover:bg-primary/90 min-w-[160px]">
-              <Link to="/contact">Request Demo</Link>
+          <div className="text-center mt-12">
+            <Button asChild size="lg" variant="outline" className="border-white/20 text-background bg-transparent hover:bg-white/10 hover:text-background">
+              <Link to="/product">See Full Product Details</Link>
             </Button>
-            <Button asChild size="lg" variant="outline" className="bg-transparent text-background border-background hover:bg-background/10 hover:text-background min-w-[160px]">
-              <Link to="/contact">Contact Team</Link>
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNER COLLEGE LOGOS + TESTIMONIALS */}
+      {/* 
+      <section className="border-y border-border py-16 bg-secondary/20">
+        <div className="container-tight">
+
+          {/* Logo strip — auto-scrolling marquee * /}
+          <p className="text-center text-xs font-bold text-muted-foreground uppercase tracking-widest mb-10">
+            Trusted by partner colleges
+          </p>
+
+          <div className="relative overflow-hidden mb-16">
+            {/* Fade edges * /}
+            <div className="absolute left-0 top-0 h-full w-24 bg-gradient-to-r from-secondary/20 to-transparent z-10 pointer-events-none" />
+            <div className="absolute right-0 top-0 h-full w-24 bg-gradient-to-l from-secondary/20 to-transparent z-10 pointer-events-none" />
+
+            {/* Scrolling track * /}
+            <div className="flex gap-8 animate-marquee w-max">
+              {[...colleges, ...colleges].map((c, i) => (
+                <div
+                  key={i}
+                  className="flex items-center justify-center px-6 py-4 bg-background border border-border rounded-xl shadow-sm flex-shrink-0"
+                >
+                  <img
+                    src={c.logo}
+                    alt={c.full}
+                    className="h-14 w-auto object-contain"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Testimonials * /}
+          <p className="text-center text-xs font-bold text-muted-foreground uppercase tracking-widest mb-10">
+            What our partners say
+          </p>
+          <div className="grid md:grid-cols-3 gap-6">
+            {testimonials.map((t, i) => (
+              <div key={i} className="bg-background border border-border rounded-xl p-6 flex flex-col gap-4">
+                <div className="flex gap-1">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} size={14} className="text-primary fill-primary" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground leading-relaxed text-sm flex-1">"{t.quote}"</p>
+                <div className="flex items-center gap-3 pt-4 border-t border-border">
+                  <div className="w-9 h-9 rounded-full bg-primary/10 text-primary font-bold text-xs flex items-center justify-center flex-shrink-0">
+                    {t.avatar}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-semibold text-sm text-foreground">{t.name}</p>
+                    <p className="text-xs text-muted-foreground">{t.role}</p>
+                  </div>
+                  <div className="flex flex-col items-center gap-1 flex-shrink-0">
+                    <img
+                      src={t.logo}
+                      alt={t.college}
+                      className="h-10 w-auto object-contain"
+                    />
+                    <span className="text-xs text-muted-foreground whitespace-nowrap">{t.college}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+      */}
+
+      {/* FINAL CTA */}
+      <section className="section-padding">
+        <div className="container-tight">
+          <div className="bg-primary rounded-2xl p-12 md:p-20 text-center text-primary-foreground">
+            <h2 className="text-3xl md:text-5xl font-black mb-6">
+              Ready to digitize your campus food?
+            </h2>
+            <p className="text-primary-foreground/80 text-lg mb-10 max-w-xl mx-auto">
+              Join leading colleges already using ZORDR to modernize their campus food operations.
+            </p>
+            <Button asChild size="lg" className="bg-background text-foreground hover:bg-background/90 h-12 px-10 text-base font-bold">
+              <Link to="/contact">Book a Demo</Link>
             </Button>
           </div>
         </div>

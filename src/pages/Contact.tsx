@@ -3,125 +3,65 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { CheckCircle, Mail, MapPin, Phone } from "lucide-react";
+import { CheckCircle, Mail, MapPin, Phone, AlertCircle } from "lucide-react";
 
 const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState({
-    name: "",
-    role: "",
-    institution: "",
-    city: "",
-    phone: "",
-    email: "",
-    message: "",
+    name: "", college: "", email: "", phone: "", vendors: "", message: "",
   });
 
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-    if (!formData.role) {
-      newErrors.role = "Please select a role";
-    }
-    if (!formData.phone.trim()) {
-      newErrors.phone = "Phone number is required";
-    } else if (!/^\d{10}$/.test(formData.phone.replace(/\D/g, ""))) {
-      newErrors.phone = "Please enter a valid 10-digit phone number";
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email address";
-    }
-    // Message is optional
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+  const validate = () => {
+    const e: Record<string, string> = {};
+    if (!formData.name.trim()) e.name = "Name is required.";
+    if (!formData.email.trim()) e.email = "Email is required.";
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) e.email = "Please enter a valid email address.";
+    if (!formData.phone.trim()) e.phone = "Phone number is required.";
+    return e;
   };
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // ... (validateForm logic remains)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!validateForm()) return;
-
+    const errs = validate();
+    if (Object.keys(errs).length > 0) { setErrors(errs); return; }
+    setErrors({});
     setIsSubmitting(true);
-
-    // --------------------------------------------------------------------------
-    // TODO: Replace 'YOUR_FORM_ID' with your actual Formspree Form ID.
-    // 1. Go to https://formspree.io/
-    // 2. Create a free account with your email (shreevansh2303@gmail.com)
-    // 3. Create a new form
-    // 4. Copy the URL (e.g., https://formspree.io/f/xyzaqwer) and paste it below
-    // --------------------------------------------------------------------------
-    const FORMSPREE_ENDPOINT = "https://formspree.io/f/xaqypzkr";
-
     try {
-      const response = await fetch(FORMSPREE_ENDPOINT, {
+      const response = await fetch("https://formspree.io/f/mzdjedzl", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          ...formData,
+          _replyto: formData.email,
+          _subject: `ZORDR Demo Request — ${formData.name}`,
+        }),
       });
-
-      if (response.ok) {
-        setIsSubmitted(true);
-      } else {
-        console.error("Form submission failed");
-        alert("Something went wrong. Please try again or email us directly.");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Something went wrong. Please check your internet connection.");
+      if (response.ok) setIsSubmitted(true);
+      else setErrors({ form: "Something went wrong. Please try again." });
+    } catch {
+      setErrors({ form: "Connection error. Please try again." });
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  const handleInputChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }));
-    if (errors[field]) {
-      setErrors((prev) => ({ ...prev, [field]: "" }));
-    }
+  const set = (field: string, value: string) => {
+    setFormData(p => ({ ...p, [field]: value }));
+    if (errors[field]) setErrors(p => ({ ...p, [field]: "" }));
   };
 
   if (isSubmitted) {
     return (
       <main className="section-padding min-h-[60vh] flex items-center">
-        <div className="container-tight">
-          <div className="max-w-md mx-auto text-center">
-            <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="text-primary" size={32} />
-            </div>
-            <h1 className="text-3xl font-bold text-foreground mb-4">
-              Thank You!
-            </h1>
-            <p className="text-muted-foreground">
-              We've received your message. Our team will contact you shortly to discuss how Zordr can transform your campus.
-            </p>
-            <Button
-              className="mt-8"
-              variant="outline"
-              onClick={() => setIsSubmitted(false)}
-            >
-              Send Another Message
-            </Button>
+        <div className="container-tight text-center">
+          <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-6">
+            <CheckCircle className="text-primary" size={32} />
           </div>
+          <h1 className="text-3xl font-bold mb-4">Thank You!</h1>
+          <p className="text-muted-foreground max-w-md mx-auto">We've received your request. Our team will be in touch shortly to schedule your demo.</p>
+          <Button className="mt-8" variant="outline" onClick={() => setIsSubmitted(false)}>Send Another Message</Button>
         </div>
       </main>
     );
@@ -129,14 +69,11 @@ const Contact = () => {
 
   return (
     <main>
-      {/* Hero Section */}
       <section className="bg-gradient-to-b from-primary/5 to-background pt-24 pb-12">
         <div className="container-tight text-center">
-          <h1 className="text-4xl md:text-5xl font-black text-foreground mb-6">
-            Contact Us
-          </h1>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Ready to modernize your campus commerce? We're here to help you get started.
+          <h1 className="text-4xl md:text-5xl font-black mb-6">Request a Demo</h1>
+          <p className="text-xl text-muted-foreground max-w-xl mx-auto">
+            See ZORDR live on your campus. Fill in the form and our team will set up a personalized walkthrough.
           </p>
         </div>
       </section>
@@ -145,79 +82,58 @@ const Contact = () => {
         <div className="container px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
 
-            {/* Contact Information */}
-            <div className="space-y-10">
+            <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold mb-6">Get in Touch</h2>
-                <p className="text-muted-foreground leading-relaxed mb-8">
-                  Whether you're a college administrator looking to digitize your campus or a canteen owner wanting to streamline operations, our team is ready to answer your questions.
+                <h2 className="text-2xl font-bold mb-4">Get in Touch</h2>
+                <p className="text-muted-foreground leading-relaxed">
+                  Whether you're a college administrator, canteen owner, or just curious about ZORDR — we're ready to talk.
                 </p>
               </div>
-
-              <div className="space-y-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Mail className="text-primary" size={20} />
+              <div className="space-y-5">
+                {[
+                  { icon: Mail,   title: "Email Us", sub: "General inquiries & partnerships", val: "contact@zordr.in",    href: "mailto:contact@zordr.in" },
+                  { icon: Phone,  title: "Call Us",  sub: "Mon–Fri, 9am to 6pm",             val: "+91 9849473492",       href: "tel:+919849473492" },
+                  { icon: MapPin, title: "Visit Us", sub: "Headquarters",                     val: "Hyderabad, Telangana", href: null },
+                ].map((item, i) => (
+                  <div key={i} className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                      <item.icon className="text-primary" size={18} />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm">{item.title}</p>
+                      <p className="text-xs text-muted-foreground mb-0.5">{item.sub}</p>
+                      {item.href ? (
+                        <a href={item.href} className="text-sm text-primary hover:underline font-medium">{item.val}</a>
+                      ) : (
+                        <p className="text-sm font-medium">{item.val}</p>
+                      )}
+                    </div>
                   </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Email Us</h3>
-                    <p className="text-sm text-muted-foreground mb-1">For general inquiries and partnerships</p>
-                    <a href="mailto:contact@zordr.in" className="text-primary hover:underline font-medium">
-                      contact@zordr.in
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <Phone className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Call Us</h3>
-                    <p className="text-sm text-muted-foreground mb-1">Mon-Fri from 9am to 6pm</p>
-                    <a href="tel:+919849473492" className="text-foreground hover:text-primary transition-colors font-medium">
-                      +91 9849473492
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-                    <MapPin className="text-primary" size={20} />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground">Visit Us</h3>
-                    <p className="text-sm text-muted-foreground mb-1">Headquarters</p>
-                    <p className="text-foreground font-medium">
-                      Hyderabad, Telangana
-                    </p>
-                  </div>
-                </div>
+                ))}
               </div>
-
-              <div className="p-6 bg-secondary/30 rounded-xl border border-border mt-8">
-                <h3 className="font-semibold mb-2">Why Zordr?</h3>
-                <ul className="space-y-2 text-sm text-muted-foreground">
-                  <li className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-primary" />
-                    <span>Specialized for high-density campuses</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-primary" />
-                    <span>Zero hardware cost for colleges</span>
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle size={16} className="text-primary" />
-                    <span>24/7 dedicated support</span>
-                  </li>
+              <div className="p-5 bg-secondary/30 border border-border rounded-xl">
+                <h3 className="font-semibold mb-3">Why ZORDR?</h3>
+                <ul className="space-y-2">
+                  {["Specialized for high-density campuses", "Zero hardware cost for colleges", "Up and running in 24 hours"].map((item) => (
+                    <li key={item} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <CheckCircle size={14} className="text-primary flex-shrink-0" />
+                      {item}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>
 
-            {/* Contact Form */}
             <div className="bg-background border border-border rounded-xl p-6 md:p-8 shadow-sm">
-              <h2 className="text-2xl font-bold mb-6">Send us a Message</h2>
-              <form onSubmit={handleSubmit} className="space-y-5">
+              <h2 className="text-2xl font-bold mb-6">Request a Demo</h2>
+              <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+
+                {errors.form && (
+                  <div className="flex items-center gap-2 text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-4 py-3">
+                    <AlertCircle size={16} className="flex-shrink-0" />
+                    {errors.form}
+                  </div>
+                )}
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
@@ -226,12 +142,11 @@ const Contact = () => {
                       id="name"
                       placeholder="Your full name"
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={(e) => set("name", e.target.value)}
                       className={errors.name ? "border-destructive" : ""}
                     />
-                    {errors.name && <p className="text-xs text-destructive">{errors.name}</p>}
+                    {errors.name && <p className="text-xs text-destructive flex items-center gap-1"><AlertCircle size={12} />{errors.name}</p>}
                   </div>
-
                   <div className="space-y-2">
                     <Label htmlFor="phone">Phone <span className="text-destructive">*</span></Label>
                     <Input
@@ -239,10 +154,10 @@ const Contact = () => {
                       placeholder="10-digit number"
                       type="tel"
                       value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      onChange={(e) => set("phone", e.target.value)}
                       className={errors.phone ? "border-destructive" : ""}
                     />
-                    {errors.phone && <p className="text-xs text-destructive">{errors.phone}</p>}
+                    {errors.phone && <p className="text-xs text-destructive flex items-center gap-1"><AlertCircle size={12} />{errors.phone}</p>}
                   </div>
                 </div>
 
@@ -250,74 +165,55 @@ const Contact = () => {
                   <Label htmlFor="email">Email <span className="text-destructive">*</span></Label>
                   <Input
                     id="email"
-                    placeholder="your@email.com"
+                    placeholder="you@institution.edu"
                     type="email"
                     value={formData.email}
-                    onChange={(e) => handleInputChange("email", e.target.value)}
+                    onChange={(e) => set("email", e.target.value)}
                     className={errors.email ? "border-destructive" : ""}
                   />
-                  {errors.email && <p className="text-xs text-destructive">{errors.email}</p>}
+                  {errors.email && <p className="text-xs text-destructive flex items-center gap-1"><AlertCircle size={12} />{errors.email}</p>}
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div className="space-y-2">
-                    <Label htmlFor="role">Role <span className="text-destructive">*</span></Label>
-                    <Select
-                      value={formData.role}
-                      onValueChange={(value) => handleInputChange("role", value)}
-                    >
-                      <SelectTrigger className={errors.role ? "border-destructive" : ""}>
-                        <SelectValue placeholder="Select your role" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="college_admin">College Administrator</SelectItem>
-                        <SelectItem value="canteen_owner">Canteen Owner</SelectItem>
-                        <SelectItem value="student">Student</SelectItem>
-                        <SelectItem value="employee">Employee Applicant</SelectItem>
-                        <SelectItem value="other">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                    {errors.role && <p className="text-xs text-destructive">{errors.role}</p>}
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="institution">Institution / Organization</Label>
+                    <Label htmlFor="college">College / Organization</Label>
                     <Input
-                      id="institution"
-                      placeholder="e.g. IIT Delhi"
-                      value={formData.institution}
-                      onChange={(e) => handleInputChange("institution", e.target.value)}
+                      id="college"
+                      placeholder="e.g. IIT Hyderabad"
+                      value={formData.college}
+                      onChange={(e) => set("college", e.target.value)}
                     />
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="city">City</Label>
-                  <Input
-                    id="city"
-                    placeholder="e.g. New Delhi"
-                    value={formData.city}
-                    onChange={(e) => handleInputChange("city", e.target.value)}
-                  />
+                  <div className="space-y-2">
+                    <Label htmlFor="vendors">Number of Vendors</Label>
+                    <Input
+                      id="vendors"
+                      type="number"
+                      min="1"
+                      placeholder="e.g. 5"
+                      value={formData.vendors}
+                      onChange={(e) => set("vendors", e.target.value)}
+                    />
+                  </div>
                 </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="message">Message</Label>
                   <Textarea
                     id="message"
-                    placeholder="Tell us about your requirements..."
-                    className="min-h-[120px]"
+                    placeholder="Tell us about your campus and what you're looking for..."
+                    className="min-h-[100px]"
                     value={formData.message}
-                    onChange={(e) => handleInputChange("message", e.target.value)}
+                    onChange={(e) => set("message", e.target.value)}
                   />
                 </div>
 
                 <Button type="submit" size="lg" className="w-full" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? "Sending..." : "Request Demo"}
                 </Button>
+
               </form>
             </div>
-
           </div>
         </div>
       </section>

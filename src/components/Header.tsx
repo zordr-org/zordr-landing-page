@@ -8,43 +8,40 @@ const Header = () => {
   const location = useLocation();
 
   const navLinks = [
-    { href: "/how-it-works", label: "How It Works" },
-    { href: "/for-colleges", label: "For Colleges" },
-    { href: "/for-canteens", label: "For Canteens" },
+    { href: "/product", label: "Product" },
+    { href: "/ecosystem", label: "Ecosystem" },
+    { href: "/pricing", label: "Pricing" },
     { href: "/careers", label: "Careers" },
-    { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <header className="sticky top-0 z-50 bg-background border-b border-border">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur border-b border-border">
       <div className="container-tight">
         <div className="flex items-center justify-between h-16">
-          {/* Logo */}
-          <Link to="/" className="text-xl font-bold text-foreground">
+          <Link to="/" className="text-xl font-black text-foreground tracking-tight">
             ZORDR
           </Link>
 
-          {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center gap-8">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 to={link.href}
-                className={`text-sm font-medium transition-colors hover:text-foreground ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                  }`}
+                className={`text-sm font-medium transition-colors hover:text-foreground ${
+                  isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                }`}
               >
                 {link.label}
               </Link>
             ))}
-            <Button asChild>
-              <Link to="/contact">Request Pilot</Link>
+            <Button asChild size="sm" className="ml-2">
+              <Link to="/contact">Request Demo</Link>
             </Button>
           </nav>
 
-          {/* Mobile Menu Button */}
           <button
             className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -54,7 +51,6 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
         {isMenuOpen && (
           <nav className="md:hidden py-4 border-t border-border">
             <div className="flex flex-col gap-4">
@@ -62,8 +58,9 @@ const Header = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className={`text-sm font-medium py-2 ${isActive(link.href) ? "text-foreground" : "text-muted-foreground"
-                    }`}
+                  className={`text-sm font-medium py-2 ${
+                    isActive(link.href) ? "text-foreground" : "text-muted-foreground"
+                  }`}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {link.label}
@@ -71,7 +68,7 @@ const Header = () => {
               ))}
               <Button asChild className="mt-2">
                 <Link to="/contact" onClick={() => setIsMenuOpen(false)}>
-                  Request Pilot
+                  Request Demo
                 </Link>
               </Button>
             </div>
