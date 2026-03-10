@@ -5,14 +5,17 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 import Index from "./pages/Index";
-import HowItWorks from "./pages/HowItWorks";
-import ForColleges from "./pages/ForColleges";
-import ForCanteens from "./pages/ForCanteens";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+import Product from "./pages/Product";
+import Ecosystem from "./pages/Ecosystem";
+import Pricing from "./pages/Pricing";
 import Careers from "./pages/Careers";
+import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import TermsAndConditions from "./pages/TermsAndConditions";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import RefundPolicy from "./pages/RefundPolicy";
 
 const queryClient = new QueryClient();
 
@@ -22,17 +25,20 @@ const App = () => (
       <Toaster />
       <Sonner />
       <HashRouter>
+        <ScrollToTop />
         <div className="min-h-screen flex flex-col">
           <Header />
           <div className="flex-1">
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/how-it-works" element={<HowItWorks />} />
-              <Route path="/for-colleges" element={<ForColleges />} />
-              <Route path="/for-canteens" element={<ForCanteens />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/contact" element={<Contact />} />
+              <Route path="/product" element={<Product />} />
+              <Route path="/ecosystem" element={<Ecosystem />} />
+              <Route path="/pricing" element={<Pricing />} />
               <Route path="/careers" element={<Careers />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms" element={<TermsAndConditions />} />
+              <Route path="/privacy" element={<PrivacyPolicy />} />
+              <Route path="/refund" element={<RefundPolicy />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
