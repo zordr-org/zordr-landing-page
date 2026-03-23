@@ -13,7 +13,7 @@ const faqs = [
   },
   {
     q: "What commission does ZORDR charge?",
-    a: "Commission starts from 3% per order. Final rates may vary based on campus size, order volume, and operational requirements.",
+    a: "Commission starts from 5% per order. Final rates may vary based on campus size, order volume, and operational requirements.",
   },
   {
     q: "Who receives the payment from students?",
@@ -73,7 +73,7 @@ const Pricing = () => {
               <div className="py-6 border-y border-border">
                 <p className="text-sm text-muted-foreground mb-1">Starting from</p>
                 <div className="flex items-end gap-2">
-                  <span className="text-7xl font-black text-primary leading-none">3%</span>
+                  <span className="text-7xl font-black text-primary leading-none">5%</span>
                   <span className="text-muted-foreground mb-2 text-base">commission<br />per order</span>
                 </div>
               </div>
