@@ -57,6 +57,9 @@ const Footer = () => {
             <Link to="/refund" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
               Refund Policy
             </Link>
+            <Link to="/policy" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Gamification Policy
+            </Link>
           </div>
         </div>
       </div>
