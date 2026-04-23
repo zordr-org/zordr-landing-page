@@ -78,7 +78,7 @@ const Index = () => {
             {[
               { icon: TrendingUp, value: "3x",  label: "Faster order throughput" },
               { icon: Shield,     value: "40%", label: "Reduction in food wastage" },
-              { icon: Zap,        value: "24h", label: "Campus onboarding time" },
+              { icon: Zap,        value: "48h", label: "Campus onboarding time" },
             ].map((stat, i) => (
               <div key={i} className="flex flex-col items-center gap-2 p-6 bg-background border border-border rounded-2xl shadow-sm">
                 <div className="w-10 h-10 rounded-lg bg-primary/10 text-primary flex items-center justify-center">
