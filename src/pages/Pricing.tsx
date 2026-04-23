@@ -73,7 +73,7 @@ const Pricing = () => {
               <div className="py-6 border-y border-border">
                 <p className="text-sm text-muted-foreground mb-1">Starting from</p>
                 <div className="flex items-end gap-2">
-                  <span className="text-7xl font-black text-primary leading-none">5%</span>
+                  <span className="text-7xl font-black text-primary leading-none">10%</span>
                   <span className="text-muted-foreground mb-2 text-base">commission<br />per order</span>
                 </div>
               </div>
